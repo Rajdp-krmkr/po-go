@@ -19,7 +19,7 @@ export default function Navbar() {
   const pathname = usePathname()
 
   return (
-    <nav className="px-40 sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center">
         <Link href="/" className="flex items-center space-x-2">
           <ActivitySquare className="h-6 w-6" />
