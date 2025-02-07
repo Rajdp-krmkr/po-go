@@ -56,6 +56,7 @@ export default function Wellbeing() {
                   alt={article.title}
                   fill
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  loading="lazy"
                 />
               </div>
               <div className="p-6">
