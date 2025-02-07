@@ -44,7 +44,7 @@ const CustomLineChart = ({ data, xKey }: { data: any[], xKey: string }) => (
   <ResponsiveContainer width="100%" height={400}>
     <LineChart data={data}>
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis 
+      <XAxis
         dataKey={xKey}
         tick={{ fontSize: 12 }}
         padding={{ left: 10, right: 10 }}
