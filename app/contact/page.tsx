@@ -36,7 +36,7 @@ export default function Contact() {
         <div className="mb-8 text-center">
           <h1 className="text-4xl font-bold">Contact Us</h1>
           <p className="mt-2 text-muted-foreground">
-            Have questions or feedback? We'd love to hear from you.
+            Have questions or feedback? We&apos;d love to hear from you.
           </p>
         </div>
 
