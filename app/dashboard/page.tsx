@@ -79,7 +79,7 @@ export default function Dashboard() {
         {/* Summary Cards */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <Card className="p-6">
-            <h3 className="font-semibold">Today's Score</h3>
+            <h3 className="font-semibold">Today&apos;s Score</h3>
             <p className="mt-2 text-3xl font-bold">85%</p>
             <p className="text-sm text-muted-foreground">Good posture time</p>
           </Card>

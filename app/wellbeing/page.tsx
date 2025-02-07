@@ -81,7 +81,7 @@ export default function Wellbeing() {
           <div className="space-y-2">
             <h3 className="font-semibold">Monitor Position</h3>
             <p className="text-muted-foreground">
-              Position your monitor at arm's length and ensure the top of the screen is at or slightly below eye level.
+              Position your monitor at arm&apos;s length and ensure the top of the screen is at or slightly below eye level.
             </p>
           </div>
           <div className="space-y-2">
