@@ -83,12 +83,12 @@ export default function Home() {
       {/* Image Section */}
       <section className="container py-8 md:py-12 lg:py-24">
         <div className="mx-auto max-w-[82rem]">
-          <div className="relative h-[400px] overflow-hidden rounded-xl border bg-background">
+          <div className="relative h-[550px] overflow-hidden rounded-xl border bg-background">
             <Image
-              src="https://img.freepik.com/premium-photo/successful-mature-businessman-work-with-laptop-inside-office-man-business-suit-sitting-desk_321831-13911.jpg"
+              src="https://emi.parkview.com/media/Image/Dashboard_952_working_desk_1_22.jpg"
               alt="Developer working at desk"
               fill
-              className="object-cover object-top"
+              className="object-cover object-bottom"
               priority
 
             />
