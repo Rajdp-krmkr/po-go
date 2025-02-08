@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { Brain } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Brain, Moon, Sun } from 'lucide-react';
 
 export default function SignupPage() {
     const [formData, setFormData] = useState({
@@ -16,6 +16,20 @@ export default function SignupPage() {
         password: '',
         confirmPassword: '',
     });
+    const [isDark, setIsDark] = useState(false);
+
+    useEffect(() => {
+        // Check system preference on mount
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setIsDark(true);
+            document.documentElement.classList.add('dark');
+        }
+    }, []);
+
+    const toggleTheme = () => {
+        setIsDark(!isDark);
+        document.documentElement.classList.toggle('dark');
+    };
 
     const validateForm = () => {
         let isValid = true;
@@ -26,7 +40,6 @@ export default function SignupPage() {
             confirmPassword: '',
         };
 
-        // Full Name validation
         if (!formData.fullName.trim()) {
             newErrors.fullName = 'Full name is required';
             isValid = false;
@@ -35,7 +48,6 @@ export default function SignupPage() {
             isValid = false;
         }
 
-        // Email validation
         if (!formData.email) {
             newErrors.email = 'Email is required';
             isValid = false;
@@ -44,7 +56,6 @@ export default function SignupPage() {
             isValid = false;
         }
 
-        // Password validation
         if (!formData.password) {
             newErrors.password = 'Password is required';
             isValid = false;
@@ -56,7 +67,6 @@ export default function SignupPage() {
             isValid = false;
         }
 
-        // Confirm Password validation
         if (!formData.confirmPassword) {
             newErrors.confirmPassword = 'Please confirm your password';
             isValid = false;
@@ -80,21 +90,31 @@ export default function SignupPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (validateForm()) {
-            // Handle signup logic here
             console.log('Form submitted:', formData);
         }
     };
 
     return (
-        <div className=" flex items-center justify-center p-4">
-            <div className="max-w-md w-full space-y-8 p-8 rounded-2xl shadow-lg">
+        <div className=" bg-gradient-to-br flex items-center justify-center p-4 transition-colors duration-200">
+            <button
+                onClick={toggleTheme}
+                className="fixed top-4 right-4 p-2 rounded-full bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-200"
+                aria-label="Toggle theme"
+            >
+                {isDark ? (
+                    <Sun className="h-6 w-6 text-yellow-500" />
+                ) : (
+                    <Moon className="h-6 w-6 text-indigo-600" />
+                )}
+            </button>
+
+            <div className="max-w-md w-full space-y-8 bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-lg transition-colors duration-200">
                 <div className="text-center">
                     <div className="flex justify-center mb-4">
-                        <h1 className="text-white font-bold text-3xl">Po-Go</h1>
-
+                        <h1 className='text-2xl font-bold'>Po-Go</h1>
                     </div>
-                    <h2 className="text-3xl font-bold text-gray-200">Create your account</h2>
-                    <p className="mt-2 text-sm text-gray-400">
+                    <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Create your account</h2>
+                    <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
                         Join AI Posture Tracking to improve your health
                     </p>
                 </div>
@@ -102,7 +122,7 @@ export default function SignupPage() {
                 <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                     <div className="space-y-4">
                         <div>
-                            <label htmlFor="fullName" className="block text-sm font-medium text-gray-300">
+                            <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                                 Full Name
                             </label>
                             <div className="mt-1">
@@ -114,17 +134,17 @@ export default function SignupPage() {
                                     required
                                     value={formData.fullName}
                                     onChange={handleChange}
-                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm placeholder-gray-400 dark:placeholder-gray-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
                                     placeholder="John Doe"
                                 />
                                 {errors.fullName && (
-                                    <p className="mt-1 text-sm text-red-600">{errors.fullName}</p>
+                                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.fullName}</p>
                                 )}
                             </div>
                         </div>
 
                         <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-gray-300">
+                            <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                                 Email address
                             </label>
                             <div className="mt-1">
@@ -136,17 +156,17 @@ export default function SignupPage() {
                                     required
                                     value={formData.email}
                                     onChange={handleChange}
-                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm placeholder-gray-400 dark:placeholder-gray-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
                                     placeholder="you@example.com"
                                 />
                                 {errors.email && (
-                                    <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.email}</p>
                                 )}
                             </div>
                         </div>
 
                         <div>
-                            <label htmlFor="password" className="block text-sm font-medium text-gray-300">
+                            <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                                 Password
                             </label>
                             <div className="mt-1">
@@ -158,17 +178,17 @@ export default function SignupPage() {
                                     required
                                     value={formData.password}
                                     onChange={handleChange}
-                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm placeholder-gray-400 dark:placeholder-gray-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
                                     placeholder="••••••••"
                                 />
                                 {errors.password && (
-                                    <p className="mt-1 text-sm text-red-600">{errors.password}</p>
+                                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.password}</p>
                                 )}
                             </div>
                         </div>
 
                         <div>
-                            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-300">
+                            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                                 Confirm Password
                             </label>
                             <div className="mt-1">
@@ -180,11 +200,11 @@ export default function SignupPage() {
                                     required
                                     value={formData.confirmPassword}
                                     onChange={handleChange}
-                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm placeholder-gray-400 dark:placeholder-gray-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
                                     placeholder="••••••••"
                                 />
                                 {errors.confirmPassword && (
-                                    <p className="mt-1 text-sm text-red-600">{errors.confirmPassword}</p>
+                                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.confirmPassword}</p>
                                 )}
                             </div>
                         </div>
@@ -193,15 +213,15 @@ export default function SignupPage() {
                     <div>
                         <button
                             type="submit"
-                            className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-black bg-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200"
+                            className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium bg-black dark:bg-white text-white dark:text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800 transition-all duration-200"
                         >
                             Create Account
                         </button>
                     </div>
 
                     <div className="text-center text-sm">
-                        <span className="text-gray-300">Already have an account?</span>{' '}
-                        <a href="/login" className="font-medium text-indigo-600 hover:text-indigo-500 transition-colors">
+                        <span className="text-gray-600 dark:text-gray-400">Already have an account?</span>{' '}
+                        <a href="/login" className="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300 transition-colors">
                             Sign in
                         </a>
                     </div>
